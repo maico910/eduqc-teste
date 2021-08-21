@@ -1,3 +1,4 @@
+import { Notify } from 'quasar'
 import { route } from 'quasar/wrappers'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
@@ -24,6 +25,27 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
+  })
+
+  Router.beforeEach(async (to, from, next) => {
+    let checkAuth = to.matched.find(record => record.meta.requiresAuth) ?? false
+
+    if (!checkAuth) {
+      next()
+      return
+    }
+
+    let login = await localStorage.getItem('login-teste')
+    if (login) {
+      next()
+    } else {
+      next({ name: 'login' })
+      Notify.create({
+        message: 'Autenticação obrigatório.',
+        color: 'negative'
+      })
+    }
+
   })
 
   return Router

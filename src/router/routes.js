@@ -3,6 +3,7 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: { requiresAuth: true },
     children: [
       { path: '', name: 'index', component: () => import('pages/Index.vue') }
     ]

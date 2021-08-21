@@ -59,10 +59,18 @@ export default {
     }
   },
 
+  async mounted () {
+    if (await localStorage.getItem('login-teste')) {
+      this.$router.push({name: 'index'})
+    }
+  },
+
   methods: {
     login() {
       if (this.user.login === 'teste@teste.com' && this.user.password === '12345678') {
         this.$router.push({name: 'index'})
+        localStorage.setItem('login-teste', true)
+        return
       }
 
       this.$q.notify({

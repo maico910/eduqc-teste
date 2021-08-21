@@ -8,6 +8,11 @@
         >
           Simulations
         </q-toolbar-title>
+        <q-btn
+          flat
+          icon="logout"
+          @click="logout"
+        />
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -20,5 +25,11 @@
 
 export default {
   name: 'MainLayout',
+  methods: {
+    logout() {
+      localStorage.removeItem('login-teste')
+      this.$router.push({name: 'login'})
+    }
+  },
 }
 </script>
