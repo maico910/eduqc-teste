@@ -19,6 +19,7 @@
 
 <script>
 import ListSimulation from 'src/components/Simulation/ListSimulation.vue';
+import SimulationService from 'src/services/SimulationService'
 
 export default {
   name: "PageIndex",
@@ -29,6 +30,19 @@ export default {
       simulations: [],
       loading: true
     }
-  }
+  },
+
+  async mounted () {
+    this.fetchData()
+  },
+
+  methods: {
+    async fetchData () {
+      let { data } = await SimulationService.getSimulations()
+
+      this.simulations = data._items
+      this.loading = false
+    }
+  },
 }
 </script>
