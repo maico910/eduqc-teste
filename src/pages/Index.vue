@@ -1,17 +1,34 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+  <q-page
+    padding
+    class="index-page flex justify-center"
+  >
+    <template v-if="loading">
+      <q-circular-progress
+        indeterminate
+        size="50px"
+        color="primary"
+        class="q-ma-md"
+      />
+    </template>
+    <template v-else>
+      <ListSimulation :simulations="simulations" />
+    </template>
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import ListSimulation from 'src/components/Simulation/ListSimulation.vue';
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+export default {
+  name: "PageIndex",
+  components: { ListSimulation },
+
+  data() {
+    return {
+      simulations: [],
+      loading: true
+    }
+  }
+}
 </script>
