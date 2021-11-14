@@ -21,7 +21,7 @@ O projeto é desenvolvido para teste técnico de EduQC, onde tem:
 - [Cypress](https://www.cypress.io/)
 
 ## Sreenshots
-![Screenshot](./screenshots\screenshot.png)
+![Screenshot](./screenshots/screenshot.png)
 
 ## Install the dependencies
 ```bash
